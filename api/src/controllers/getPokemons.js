@@ -1,17 +1,17 @@
 const { Pokemon } = require ("../db");
+const axios = require("axios");
 
 const getPokemons = async (req, res) => {
     
     try {
-        const getPokemons = await Pokemon.findAll();
-        getPokemons.map((pokemon) => {
-            if (!pokemon.image) {
-                pokemon.image = "C:\Users\giamp\Downloads\cr-pi-drivers-main\client\public\logo_default.png"
-            }
-        });
-        return res.status(200).json(getPokemons)
+        const dbPokemons = await Pokemon.findAll();
+        const apiPokemonsResponse = await axios.get("https://pokeapi.co/api/v2/pokemon");
+        const apiPokemons = apiPokemonsResponse.data.results;
+        const pokemons = [];
+        pokemons.push(dbPokemons, apiPokemons);
+        return res.status(200).json(pokemons)
     } catch (error) {
-        return res.status(500).send(error.message);
+        return res.status(500).send(error.message)
     }
 };
 
