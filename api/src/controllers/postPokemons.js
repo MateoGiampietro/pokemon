@@ -10,10 +10,8 @@ const postPokemons = async (req, res) => {
             });
 
             for (const typeName of types) {
-                // Buscar el tipo en la base de datos
                 const type = await Type.findOrCreate({ where: { name: typeName }});
                 
-                // Si el tipo existe, asociarlo al Pokémon
                 if (type) {
                     await PokemonTypes.create({
                         PokemonId: newPokemon.id,
