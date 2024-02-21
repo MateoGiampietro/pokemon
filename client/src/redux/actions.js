@@ -1,34 +1,6 @@
-export const filterDriversByName = (name) => {
+export const setAllPokemons = (pokemons) => {
     return {
-        type: "FILTERBYNAME",
-        payload: name
+        type: "SETALLPOKEMONS",
+        payload: pokemons
     };
 };
-
-export const orderDrivers = (order) => {
-    return {
-        type: "ORDER",
-        payload: order
-    };
-};
-
-export const filterDriversByTeam = (team) => {
-    return {
-        type: "FILTERBYTEAM",
-        payload: team
-    };
-};
-
-export const setAllDrivers = (drivers) => {
-    return {
-      type: "SETALLDRIVERS",
-      payload: drivers
-    };
-};
-
-export const setPage = (page) => {
-    return {
-        type: "SETPAGE",
-        payload: page
-    }
-}

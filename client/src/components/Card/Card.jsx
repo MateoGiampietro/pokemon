@@ -1,19 +1,14 @@
-import './Card.css'
-import { Link } from "react-router-dom";
+import axios from "axios";
 
-export default function Card(props) {
-
-    const imageUrl = props.image === "default"
-        ? "/logo_default.png"
-        : props.image
+export default async function Card(props) {
+    const pokemonData1 = await axios.get(`http://localhost:3001/pokemons/${props.name}`);
+    const pokemonData2 = await axios.get(`http://localhost:3001/pokemons/${pokemonData1.id}`);
 
     return (
         <div className="card-container">
-            <Link to={`/detail/${props.id}`}>
-                <h2>{props.name}</h2>
-            </Link>
-            <h4>Escuderías: {props.teams}</h4>
+            <h2>{props[1].name}</h2>
+            <h4>Escuderías: {props[1].teams}</h4>
             <img src={imageUrl} alt={props.id}/>
         </div>
-    );
+    )
 }

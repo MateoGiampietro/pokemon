@@ -5,8 +5,7 @@ const getPokemonById = async (req, res) => {
     try {
         const pokeID = req.params.idPokemon;
         const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokeID}`);
-        const { id, health, name, attack, defense, image, speed, height, weight } = data;
-        const pokemon = { id, health, name, attack, defense, image, speed, height, weight }
+        const pokemon = data;
         return pokemon.name
                 ? res.json(pokemon)
                 : res.status(404).send("No ha sido encontrado un pokemon con ese ID.")
