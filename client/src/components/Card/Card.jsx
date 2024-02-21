@@ -1,14 +1,12 @@
-import axios from "axios";
-
-export default async function Card(props) {
-    const pokemonData1 = await axios.get(`http://localhost:3001/pokemons/${props.name}`);
-    const pokemonData2 = await axios.get(`http://localhost:3001/pokemons/${pokemonData1.id}`);
+export default function Card(props) {
 
     return (
         <div className="card-container">
-            <h2>{props[1].name}</h2>
-            <h4>Escuderías: {props[1].teams}</h4>
-            <img src={imageUrl} alt={props.id}/>
+            <h2>{props.name}</h2>
+            <img src={props.image} alt={props.id}/>
+            <h4>Tipos: {props.types.length === 1 ?
+                props.types[0].type.name :
+                `${props.types[0].type.name}, ${props.types[1].type.name}`}</h4>
         </div>
     )
 }

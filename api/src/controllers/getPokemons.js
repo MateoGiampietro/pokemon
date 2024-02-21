@@ -7,8 +7,13 @@ const getPokemons = async (req, res) => {
         const dbPokemons = await Pokemon.findAll();
         const apiPokemonsResponse = await axios.get("https://pokeapi.co/api/v2/pokemon");
         const apiPokemons = apiPokemonsResponse.data.results;
-        const pokemons = [];
-        pokemons.push(dbPokemons, apiPokemons);
+        const apiPokemonsData = await Promise.all(apiPokemons.map(async (pokemon) => {
+            const response = await axios.get(`http://localhost:3001/pokemons/${pokemon.name}`);
+            const pokemonData = response.data;
+            const { name, stats, height, weight, id, sprites: { front_default }, types } = pokemonData;
+            return { name, stats, height, weight, id, front_default, types }
+        }));
+        const pokemons = [...dbPokemons, ...apiPokemonsData];
         return res.status(200).json(pokemons)
     } catch (error) {
         return res.status(500).send(error.message)
