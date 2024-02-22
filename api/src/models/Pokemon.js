@@ -39,6 +39,11 @@ module.exports = (sequelize) => {
     weight: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    origin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
     }
   }, { timestamps: false });
 };
