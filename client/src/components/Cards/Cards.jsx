@@ -1,4 +1,5 @@
 import Card from '../Card/Card';
+import "./Cards.css";
 
 export default function Cards({ pokemons }) {
     
@@ -14,5 +15,5 @@ export default function Cards({ pokemons }) {
         )
     })
 
-    return <div>{cardComponents}</div>;
+    return <div className="card-grid">{cardComponents}</div>;
 };
