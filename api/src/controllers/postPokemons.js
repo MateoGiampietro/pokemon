@@ -35,7 +35,7 @@ const postPokemons = async (req, res) => {
                 weight: newPokemon.weight,
                 types: associatedTypes.map(type => type.name)
             };
-
+            
             return res.status(200).json(pokemonData);
         } else {
             return res.status(400).send("Faltan datos");

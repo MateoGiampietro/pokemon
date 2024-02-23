@@ -1,9 +1,11 @@
-const { Pokemon } = require ("../db");
+const { Pokemon, Type, PokemonTypes } = require("../db");
 const axios = require("axios");
 
 const getPokemons = async (req, res) => {
     try {
-        const dbPokemons = await Pokemon.findAll();
+        const dbPokemons = await Pokemon.findAll({
+            include: Type
+        });
         let allApiPokemons = [];
 
         const fetchPokemonsFromApi = async (url) => {
@@ -32,6 +34,5 @@ const getPokemons = async (req, res) => {
         return res.status(500).send(error.message);
     }
 };
-
 
 module.exports = getPokemons;

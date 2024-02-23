@@ -34,4 +34,5 @@
     width: 100%;
     background-color: #333; /* Color de fondo de la barra de navegación */
     color: white; /* Color del texto */
+    z-index: 100;
 }
