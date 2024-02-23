@@ -1,15 +1,13 @@
 .card-container {
     position: relative;
-    width: 300px;
+    width: 220px;
     height: 400px;
     margin: 10px;
-    padding: 15px;
     border: 3px solid black;
-    border-radius: 8px;
+    border-radius: 200px;
     text-align: center;
-    background: linear-gradient(to bottom, #ff0000 50%, #ffffff 50%);
+    background: linear-gradient(to bottom, #f24242 50%, #ffffff 50%);
     flex: 0 0 calc(25% - 20px); /* Ancho de 25% con un margen de 10px entre las tarjetas */
-    margin: 10px;
 }
 
 .card-container h2 {

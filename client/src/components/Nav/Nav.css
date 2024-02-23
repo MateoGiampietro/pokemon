@@ -1,0 +1,37 @@
+.nav button {
+    margin-right: 50px; /* Reducido para dar más espacio */
+    background-color: #ed5252; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    transition: background-color 0.3s; /* Transición suave del color de fondo */
+}
+
+.nav button:hover {
+    background-color: #f24242; /* Color de fondo al pasar el ratón */
+}
+
+.nav select {
+    margin-right: 20px; /* Espacio entre elementos */
+    padding: 8px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde con color de borde */
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: #f2f2f2; /* Color de fondo */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    color: #555; /* Color del texto */
+    appearance: none; /* Elimina el estilo nativo del sistema operativo */
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: left; /* Alinea los elementos a la derecha */
+    padding: 10px; /* Espaciado interno */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #333; /* Color de fondo de la barra de navegación */
+    color: white; /* Color del texto */
+}

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterPokemonsByType, setAllPokemons, filterPokemonsByOrigin, orderPokemons, setPage } from "../../redux/actions";
+import { setAllPokemons, setPage } from "../../redux/actions";
 import Cards from "../Cards/Cards";
 import "./Home.css";
 
@@ -15,33 +15,43 @@ export default function Home() {
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
     const currentPokemons = pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
 
-    const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(pokemons.length / pokemonsPerPage); i++) {
-        pageNumbers.push(i);
+    const totalPages = Math.ceil(pokemons.length / pokemonsPerPage);
+    const maxPagesToShow = 5;
+
+    let startPage, endPage;
+    if (totalPages <= maxPagesToShow) {
+        startPage = 1;
+        endPage = totalPages;
+    } else {
+        if (currentPage <= Math.ceil(maxPagesToShow / 2)) {
+            startPage = 1;
+            endPage = maxPagesToShow;
+        } else if (currentPage + Math.floor(maxPagesToShow / 2) >= totalPages) {
+            startPage = totalPages - maxPagesToShow + 1;
+            endPage = totalPages;
+        } else {
+            startPage = currentPage - Math.floor(maxPagesToShow / 2);
+            endPage = currentPage + Math.floor(maxPagesToShow / 2);
+        }
     }
 
-    const handlePage = event => {
-        dispatch(setPage(event.target.value));
+    const handlePage = (page) => {
+        dispatch(setPage(page));
     };
 
-    const handleFilterType = event => {
-        dispatch(filterPokemonsByType(event.target.value));
+    const handleFirstPage = () => {
+        dispatch(setPage(1));
     };
 
-    const handleFilterOrigin = event => {
-        dispatch(filterPokemonsByOrigin(event.target.value));
-    };
-
-    const handleOrder = event => {
-        dispatch(orderPokemons(event.target.value));
+    const handleLastPage = () => {
+        dispatch(setPage(totalPages));
     };
 
     useEffect(() => {
         const fetchPokemons = async () => {
             try {
-                const getPokemons = await axios.get('http://localhost:3001/pokemons');
-                
-                dispatch(setAllPokemons(getPokemons.data))
+                const response = await axios.get('http://localhost:3001/pokemons');
+                dispatch(setAllPokemons(response.data));
             } catch (error) {
                 console.log(error.message);
                 alert("Error al cargar los pokemons.");
@@ -53,46 +63,26 @@ export default function Home() {
 
     return (
         <div className='home'>
-            <select name="type" onChange={handleFilterType}>
-                <option value="All">Todos</option>
-                <option value="normal">Normal</option>
-                <option value="fighting">Lucha</option>
-                <option value="flying">Volador</option>
-                <option value="poison">Veneno</option>
-                <option value="ground">Tierra</option>
-                <option value="rock">Roca</option>
-                <option value="bug">Bicho</option>
-                <option value="ghost">Fantasma</option>
-                <option value="steel">Acero</option>
-                <option value="fire">Fuego</option>
-                <option value="water">Agua</option>
-                <option value="grass">Planta</option>
-                <option value="electric">Electrico</option>
-                <option value="psychic">Psiquico</option>
-                <option value="ice">Hielo</option>
-                <option value="dragon">Dragon</option>
-                <option value="dark">Siniestro</option>
-                <option value="fairy">Hada</option>
-                <option value="unknown">Desconocido</option>
-                <option value="shadow">Sombra</option>
-            </select>
-            <select name="type" onChange={handleFilterOrigin}>
-                <option value="All">Todos</option>
-                <option value="db">Base de Datos</option>
-                <option value="api">API</option>
-            </select>
-            <select name="order" onChange={handleOrder}>
-              <option value="aNombre">Ascendente alfabetico</option>
-              <option value="dNombre">Descendente alfabetico</option>
-              <option value="aAtaque">Ataque ascendente</option>
-              <option value="dAtaque">Ataque descendente</option>
-            </select>
-            <Cards pokemons = {currentPokemons}/>
-            <select name="page" onChange={handlePage}>
-                {pageNumbers.map((num, index) => (
-                    <option key={index} value={num}>{num}</option>
+            <Cards pokemons={currentPokemons} />
+            <div className="pagination">
+                <button onClick={handleFirstPage}>Primera</button>
+                {currentPage > 1 && (
+                    <button onClick={() => handlePage(currentPage - 1)}>Anterior</button>
+                )}
+                {Array.from({ length: (endPage - startPage) + 1 }, (_, i) => i + startPage).map((num) => (
+                    <button
+                        key={num}
+                        onClick={() => handlePage(num)}
+                        className={currentPage === num ? "active" : ""}
+                    >
+                        {num}
+                    </button>
                 ))}
-            </select>
+                {currentPage < totalPages && (
+                    <button onClick={() => handlePage(currentPage + 1)}>Siguiente</button>
+                )}
+                <button onClick={handleLastPage}>Última</button>
+            </div>
         </div>
     );
 }

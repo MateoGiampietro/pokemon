@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     image: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     attack: {
@@ -30,15 +30,15 @@ module.exports = (sequelize) => {
     },
     speed: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     height: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.NUMBER,
+      allowNull: true
     },
     weight: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.NUMBER,
+      allowNull: true
     },
     origin: {
       type: DataTypes.BOOLEAN,

@@ -1,5 +1,6 @@
-import React from "react"
-import { useLocation } from 'react-router-dom'
+import React from "react";
+import { useLocation } from 'react-router-dom';
+import "./Detail.css";
 
 export default function Detail({ pokemons }) {
     const location = useLocation();
@@ -8,8 +9,8 @@ export default function Detail({ pokemons }) {
     const pokemon = pokemons.filter((pokemon) => pokemon.id === Number(id));
 
     return (
-        <div className='details-container'>
-            <div className='details'>
+        <div className='detail-container'>
+            <div className='detail'>
                 <h2>ID: {pokemon[0].id}</h2>
                 <h4>Nombre: {pokemon[0].name}</h4>
                 <h4>Vida: {pokemon[0].stats[0].base_stat}</h4>
