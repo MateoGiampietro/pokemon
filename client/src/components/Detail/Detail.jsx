@@ -12,19 +12,19 @@ export default function Detail({ pokemons }) {
         const number = parseInt(hex, 16);
         return number;
     };
-
+    
     if (typeof pokemon.id === "string") {
         let newNumber = uuidToNumber(pokemon.id);
         newNumber = newNumber % 1000 ;
         pokemon.id = newNumber + 1302;
     }
 
-    if (pokemon.hasOwnProperty("stats")) {
+    if (!pokemon[0].hasOwnProperty("origin")) {
         return (
             <div className='detail-container'>
                 <div className='detail'>
                     <h2>ID: {pokemon[0].id}</h2>
-                    <h4>Nombre: {pokemon[0].name}</h4>
+                    <h4>Nombre: {pokemon[0].name.toUpperCase()}</h4>
                     <h4>Vida: {pokemon[0].stats[0].base_stat}</h4>
                     <h4>Ataque: {pokemon[0].stats[1].base_stat}</h4>
                     <h4>Defensa: {pokemon[0].stats[2].base_stat}</h4>
@@ -47,7 +47,7 @@ export default function Detail({ pokemons }) {
             <div className='detail-container'>
                 <div className='detail'>
                     <h2>ID: {pokemon[0].id}</h2>
-                    <h4>Nombre: {pokemon[0].name}</h4>
+                    <h4>Nombre: {pokemon[0].name.toUpperCase()}</h4>
                     <h4>Vida: {pokemon[0].health}</h4>
                     <h4>Ataque: {pokemon[0].attack}</h4>
                     <h4>Defensa: {pokemon[0].defense}</h4>

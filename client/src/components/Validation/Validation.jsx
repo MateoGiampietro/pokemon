@@ -52,7 +52,6 @@ export default function Validation(userData, errors, setErrors) {
                     delete errorsCopy.weight;
                 }
                 break;
-            // Puedes agregar validaciones adicionales para los demás campos según sea necesario
             default:
                 break;
         }

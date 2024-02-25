@@ -3,7 +3,13 @@ const { Pokemon, Type, PokemonTypes } = require ("../db.js");
 const postPokemons = async (req, res) => {
 
     try {
-        const { name, image, health, attack, defense, speed, height, weight, types } = req.body;
+        const { name, image, health, attack, defense, speed, height, weight } = req.body;
+        
+        if (req.body.type2) {
+            var types = [req.body.type1, req.body.type2];
+        } else {
+            var types = [req.body.type1];
+        }
         if (name && image && health && attack && defense && speed && height && weight && types) {
             const newPokemon = await Pokemon.create({
                 name, image, health, attack, defense, speed, height, weight

@@ -3,16 +3,18 @@
     width: 220px;
     height: 400px;
     margin: 10px;
+    margin-top: 20px;
     border: 3px solid black;
     border-radius: 200px;
     text-align: center;
     background: linear-gradient(to bottom, #f24242 50%, #ffffff 50%);
-    flex: 0 0 calc(25% - 20px); /* Ancho de 25% con un margen de 10px entre las tarjetas */
+    flex: 0 0 calc(25% - 20px);
 }
 
 .card-container h2 {
     margin-bottom: 10px;
-    color: black;
+    color: rgb(249, 232, 232);
+    text-shadow: #000000;
 }
 
 .card-container h4 {
@@ -20,9 +22,9 @@
 }
 
 .card-container img {
-    max-width: 100%; /* Ajusta el tamaño máximo de la imagen al ancho del contenedor */
-    height: 250px; /* Ajusta automáticamente la altura para mantener la proporción */
-    object-fit: contain; /* Escala la imagen para que quepa dentro del contenedor sin distorsión */
+    max-width: 300px;
+    height: 250px;
+    object-fit: contain;
     border-radius: 4px;
     position: relative;
     z-index: 1;
@@ -43,6 +45,6 @@
 
 .card-grid {
     display: flex;
-    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en filas */
-    justify-content: space-between; /* Distribuye el espacio entre las tarjetas */
+    flex-wrap: wrap;
+    justify-content: space-between;
 }

@@ -92,9 +92,17 @@ const rootReducer = (state = initialState, action) => {
             orderCopy.sort((a, b) => {
                 const nameA = (a.name);
                 const nameB = (b.name);
-            
-                const atkA = a.stats[1].base_stat.toString();
-                const atkB = b.stats[1].base_stat.toString();
+                
+                if (a.stats) {
+                    var atkA = a.stats[1].base_stat.toString();
+                } else {
+                    var atkA = a.attack.toString()
+                }
+                if (b.stats) {
+                    var atkB = b.stats[1].base_stat.toString();
+                } else {
+                    var atkB = b.attack.toString()
+                }
             
                 if (action.payload === "aNombre") return nameA.localeCompare(nameB);
                 if (action.payload === "dNombre") return nameB.localeCompare(nameA);

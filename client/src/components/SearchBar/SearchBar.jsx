@@ -55,8 +55,6 @@ export default function SearchBar() {
                 <option value="dragon">Dragon</option>
                 <option value="dark">Siniestro</option>
                 <option value="fairy">Hada</option>
-                <option value="unknown">Desconocido</option>
-                <option value="shadow">Sombra</option>
             </select>
             <select name="type" onChange={handleFilterOrigin}>
                 <option value="All">Todos</option>

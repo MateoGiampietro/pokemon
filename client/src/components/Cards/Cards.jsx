@@ -15,15 +15,27 @@ export default function Cards({ pokemons }) {
             newNumber = newNumber % 1000 ;
             pokemon.id = newNumber + 1302;
         }
-        return (
-            <Card
-                key = {pokemon.id}
-                id = {pokemon.id}
-                name = {pokemon.name}
-                image = {pokemon.front_default}
-                types = {pokemon.types || pokemon.Types}
-            />
-        )
+        if (pokemon.front_default) {
+            return (
+                <Card
+                    key = {pokemon.id}
+                    id = {pokemon.id}
+                    name = {pokemon.name}
+                    image = {pokemon.front_default}
+                    types = {pokemon.types || pokemon.Types}
+                />
+            )
+        } else {
+            return (
+                <Card
+                    key = {pokemon.id}
+                    id = {pokemon.id}
+                    name = {pokemon.name}
+                    image = {pokemon.image}
+                    types = {pokemon.types || pokemon.Types}
+                />
+            )
+        }
     })
 
     return <div className="card-grid">{cardComponents}</div>;

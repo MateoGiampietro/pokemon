@@ -14,7 +14,8 @@ export default function Form() {
         speed: '',
         height: '',
         weight: '',
-        types: ''
+        type1: '',
+        type2: ''
     });
 
     const [ errors, setErrors ] = useState({
@@ -26,13 +27,14 @@ export default function Form() {
         speed: '',
         height: '',
         weight: '',
-        types: ''
+        type1: '',
+        type2: ''
     });
 
     const handleChange = (event) => {
         const property = event.target.name;
         const value = event.target.value;
-
+        
         setUserData({...userData, [property]: value});
         Validation({...userData, [property]: value}, errors, setErrors);
     }
@@ -41,20 +43,22 @@ export default function Form() {
         event.preventDefault();
         
         try {
+            console.log(userData)
             const response = await axios.post('http://localhost:3001/pokemons', userData, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
             });
-
+            
             if (response.status === 200) {
-                console.log("Se ha subido tu driver a la base de datos.")
+                alert("Se ha subido tu pokemon a la base de datos.")
             } else {
-                console.log("Algo ha salido mal.")
+                alert("Algo ha salido mal.")
             }
 
         } catch (error) {
             console.log(error.message);
+            alert("Algo ha salido mal.")
         }
     }
 
@@ -104,11 +108,56 @@ export default function Form() {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor='types'>Tipo/s:</label>
-                    <select multiple>
-                        <option value="opcion1">Opción 1</option>
-                        <option value="opcion2">Opción 2</option>
-                        <option value="opcion3">Opción 3</option>
+                    <label htmlFor='image'>Imagen:</label>
+                    <input type='text' name='image' value={userData.image} onChange={handleChange}/>
+                    {errors.image && <span className="error-message">{errors.image}</span>}
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor='type1'>Tipo 1:</label>
+                    <select name='type1' value={userData.type1} onChange={handleChange}>
+                        <option value="normal">Normal</option>
+                        <option value="fighting">Lucha</option>
+                        <option value="flying">Volador</option>
+                        <option value="poison">Veneno</option>
+                        <option value="ground">Tierra</option>
+                        <option value="rock">Roca</option>
+                        <option value="bug">Bicho</option>
+                        <option value="ghost">Fantasma</option>
+                        <option value="steel">Acero</option>
+                        <option value="fire">Fuego</option>
+                        <option value="water">Agua</option>
+                        <option value="grass">Planta</option>
+                        <option value="electric">Electrico</option>
+                        <option value="psychic">Psiquico</option>
+                        <option value="ice">Hielo</option>
+                        <option value="dragon">Dragon</option>
+                        <option value="dark">Siniestro</option>
+                        <option value="fairy">Hada</option>
+                    </select>
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor='type2'>Tipo 2:</label>
+                    <select name='type2' value={userData.type2} onChange={handleChange}>
+                        <option value="normal">Normal</option>
+                        <option value="fighting">Lucha</option>
+                        <option value="flying">Volador</option>
+                        <option value="poison">Veneno</option>
+                        <option value="ground">Tierra</option>
+                        <option value="rock">Roca</option>
+                        <option value="bug">Bicho</option>
+                        <option value="ghost">Fantasma</option>
+                        <option value="steel">Acero</option>
+                        <option value="fire">Fuego</option>
+                        <option value="water">Agua</option>
+                        <option value="grass">Planta</option>
+                        <option value="electric">Electrico</option>
+                        <option value="psychic">Psiquico</option>
+                        <option value="ice">Hielo</option>
+                        <option value="dragon">Dragon</option>
+                        <option value="dark">Siniestro</option>
+                        <option value="fairy">Hada</option>
                     </select>
                 </div>
 
