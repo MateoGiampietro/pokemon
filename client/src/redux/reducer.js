@@ -47,10 +47,18 @@ const rootReducer = (state = initialState, action) => {
             }
 
             const typeFilter = state.pokemons.filter((pokemon) => {
-                if (pokemon.types.length === 1) {
-                    return pokemon.types[0].type.name === action.payload;
-                } else if (pokemon.types.length === 2) {
-                    return pokemon.types.some(type => type.type.name === action.payload);
+                if (pokemon.Types) {
+                    if (pokemon.Types.length === 1) {
+                        return pokemon.Types[0].name === action.payload;
+                    } else if (pokemon.Types.length === 2) {
+                        return pokemon.Types.some(type => type.name === action.payload);
+                    }
+                } else {
+                    if (pokemon.types.length === 1) {
+                        return pokemon.types[0].type.name === action.payload;
+                    } else if (pokemon.types.length === 2) {
+                        return pokemon.types.some(type => type.type.name === action.payload);
+                    }
                 }
             });
 
