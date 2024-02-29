@@ -96,29 +96,33 @@ const rootReducer = (state = initialState, action) => {
             
         case "ORDERPOKEMONS":
             const orderCopy = [...state.pokemons];
-        
-            orderCopy.sort((a, b) => {
-                const nameA = (a.name);
-                const nameB = (b.name);
-                
-                if (a.stats) {
-                    var atkA = a.stats[1].base_stat.toString();
-                } else {
-                    var atkA = a.attack.toString()
-                }
-                if (b.stats) {
-                    var atkB = b.stats[1].base_stat.toString();
-                } else {
-                    var atkB = b.attack.toString()
-                }
             
+            orderCopy.sort((a, b) => {
+                const nameA = a.name;
+                const nameB = b.name;
+                
+                let atkA, atkB;
+        
+                if (a.stats) {
+                    atkA = parseInt(a.stats[1].base_stat);
+                } else {
+                    atkA = parseInt(a.attack);
+                }
+        
+                if (b.stats) {
+                    atkB = parseInt(b.stats[1].base_stat);
+                } else {
+                    atkB = parseInt(b.attack);
+                }
+                
                 if (action.payload === "aNombre") return nameA.localeCompare(nameB);
                 if (action.payload === "dNombre") return nameB.localeCompare(nameA);
-                if (action.payload === "aAtaque") return atkA.localeCompare(atkB);
-                if (action.payload === "dAtaque") return atkB.localeCompare(atkA);
-            
+                if (action.payload === "aAtaque") return atkA - atkB;
+                if (action.payload === "dAtaque") return atkB - atkA;
+                
                 return 0;
             });
+            
         
             return {
                 ...state,
